@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FBF6EF">
+<title>ORDENÁ TU MENTE · NatyCoach</title>
+<style>
+:root{
+  --cream:#FBF6EF; --paper:#FFFCF8; --rose:#EBD0D1; --rose-d:#A0616A;
+  --lav:#DDD5EE; --lav-d:#6F5F9E; --sky:#D9E9F2; --sky-d:#4A7A99;
+  --gold:#B8935A; --gold-t:#86672E; --gold-l:#E8D6AE;
+  --ink:#3A3440; --muted:#766D7E; --line:#E8DCD1;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;
+  background-image:radial-gradient(1200px 500px at 100% -10%,rgba(221,213,238,.35),transparent 60%),radial-gradient(900px 500px at -20% 30%,rgba(235,208,209,.30),transparent 60%);
+  background-attachment:fixed;padding-bottom:env(safe-area-inset-bottom,0px)}
+button{font-family:var(--sans);cursor:pointer}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.2;margin:0}
+p{margin:0 0 1em}
+a{color:var(--lav-d)}
+
+/* barra superior */
+#bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+  padding:calc(env(safe-area-inset-top,0px) + 8px) 14px 8px;background:rgba(251,246,239,.92);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+#bar.hide{display:none}
+#bar .brand{font-size:15px;letter-spacing:.06em;color:var(--gold-t);font-style:italic}
+.ibtn{border:0;background:transparent;color:var(--ink);font-size:15px;padding:10px 12px;border-radius:12px;min-height:44px}
+.ibtn:active{background:var(--lav)}
+#prog{font-family:var(--sans);font-size:14px;color:var(--muted);min-width:64px;text-align:right;padding-right:6px}
+
+#app{max-width:600px;margin:0 auto;padding:0 20px 110px}
+.page{padding-top:26px}
+.kicker{font-family:var(--sans);font-size:14px;color:var(--gold-t);margin-bottom:6px}
+.page h1{font-size:32px;margin-bottom:18px}
+.lead{font-size:20px;color:var(--ink)}
+.rule{height:1px;border:0;background:linear-gradient(90deg,transparent,var(--gold-l),transparent);margin:30px 0}
+.small{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.55}
+
+/* portada */
+.cover{position:relative;min-height:100vh;min-height:100svh;margin:0 -20px;padding:calc(env(safe-area-inset-top,0px) + 34px) 28px 40px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;
+  background:linear-gradient(172deg,#F2D9DA 0%,#E6DDF1 46%,#D6E7F1 100%)}
+.cover svg.orn{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cover .in{position:relative;z-index:2;max-width:430px}
+.cover .by{font-style:italic;color:var(--gold-t);letter-spacing:.08em;font-size:17px}
+.cover h1{font-size:clamp(38px,11.5vw,56px);letter-spacing:.05em;line-height:1.08;margin:22px 0 18px;color:#3A3046}
+.cover .sub{font-style:italic;font-size:19px;line-height:1.55;color:#4B4254;margin:0 auto 26px}
+.cover .gl{width:70px;height:1px;background:var(--gold);margin:0 auto 26px}
+.stack{display:flex;flex-direction:column;gap:12px;align-items:center}
+.btn{font-size:17px;border:0;border-radius:999px;padding:15px 30px;background:var(--lav-d);color:#fff;min-height:50px;text-decoration:none;display:inline-block;text-align:center}
+.btn:active{transform:scale(.98)}
+.btn.o{background:rgba(255,255,255,.55);color:var(--ink);border:1.5px solid var(--gold)}
+.btn.g{background:var(--gold-t)}
+.btn.s{font-size:15px;padding:11px 20px;min-height:44px}
+.btn.done{background:var(--sky-d)}
+.cover .foot{font-family:var(--sans);font-size:13px;color:#5b5163;margin-top:26px}
+
+/* páginas de contenido */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:22px 20px;margin:22px 0}
+.tint-r{background:rgba(235,208,209,.35);border-color:rgba(235,208,209,.9)}
+.tint-l{background:rgba(221,213,238,.35);border-color:rgba(221,213,238,.9)}
+.tint-s{background:rgba(217,233,242,.45);border-color:rgba(217,233,242,.95)}
+.tint-g{background:rgba(232,214,174,.30);border-color:rgba(232,214,174,.8)}
+.pull{font-style:italic;font-size:22px;line-height:1.5;text-align:center;padding:26px 6px;margin:26px 0;border-top:1px solid var(--gold-l);border-bottom:1px solid var(--gold-l)}
+.pull:before{content:"✦";display:block;color:var(--gold);font-style:normal;font-size:14px;margin-bottom:8px}
+.sec{font-size:22px;margin:34px 0 4px}
+.how{color:#4b4453}
+
+/* práctica: métodos */
+.gest{border-left:4px solid var(--lav);padding:4px 0 4px 16px;margin:22px 0}
+.gest h2{font-size:26px;letter-spacing:.03em}
+.gest .q{font-style:italic;color:var(--lav-d)}
+details.gd{background:var(--paper);border:1px solid var(--line);border-radius:18px;margin:14px 0;overflow:hidden}
+details.gd summary{list-style:none;padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:20px;min-height:56px}
+details.gd summary::-webkit-details-marker{display:none}
+details.gd summary>span:nth-child(2){flex:1;line-height:1.3}
+details.gd summary .small{display:block;margin-top:3px}
+details.gd summary:after{content:"+";margin-left:auto;color:var(--gold-t);font-family:var(--sans);font-size:22px}
+details.gd[open] summary:after{content:"–"}
+details.gd .bd{padding:0 18px 18px}
+.dot{width:14px;height:14px;border-radius:50%;flex:none}
+.d-Descargar{background:var(--sky)} .d-Ordenar{background:var(--lav)} .d-Elegir{background:var(--rose)} .d-Soltar{background:var(--gold-l)}
+.pill{display:inline-block;font-family:var(--sans);font-size:14px;padding:5px 13px;border-radius:999px;color:var(--ink)}
+.p-Descargar{background:var(--sky)} .p-Ordenar{background:var(--lav)} .p-Elegir{background:var(--rose)} .p-Soltar{background:var(--gold-l)}
+
+/* encabezado de día */
+.dayh{display:flex;gap:16px;align-items:center;margin-bottom:10px}
+.dnum{flex:none;width:82px;height:82px;border-radius:50%;border:1.5px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,252,248,.8)}
+.dnum small{font-family:var(--sans);font-size:12px;color:var(--gold-t);line-height:1}
+.dnum b{font-weight:400;font-size:38px;line-height:1.05}
+.dayh .meta{font-family:var(--sans);font-size:14px;color:var(--muted);margin-bottom:6px}
+.dayt{font-size:30px;margin:14px 0 14px}
+
+/* campos */
+.fld{margin:24px 0}
+.fld>label,.lbl{display:block;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.4}
+.fld.t-rose,.fld.t-lav,.fld.t-sky,.fld.t-gold{padding:14px 16px 10px;border-radius:16px}
+.t-rose{background:rgba(235,208,209,.38)} .t-lav{background:rgba(221,213,238,.42)} .t-sky{background:rgba(217,233,242,.55)} .t-gold{background:rgba(232,214,174,.32)}
+textarea,input[type=text],input[type=date],select{font-family:var(--serif);font-size:17px;color:var(--ink);width:100%;border:0;outline:0;background:transparent;border-radius:0}
+textarea{resize:none;overflow:hidden;line-height:34px;padding:0 2px;background-image:linear-gradient(transparent 33px,#DCCDBF 33px);background-size:100% 34px}
+textarea:focus{background-image:linear-gradient(transparent 33px,var(--gold) 33px)}
+input[type=text]{border-bottom:1px solid #DCCDBF;padding:6px 2px;min-height:44px}
+input[type=text]:focus,input[type=date]:focus{border-bottom-color:var(--gold)}
+input[type=date]{border-bottom:1px solid #DCCDBF;padding:8px 2px;min-height:44px}
+::placeholder{color:#A99FB0;font-style:italic}
+.fill{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;margin:18px 0}
+.fill span{font-size:17px}
+.fill input{flex:1 1 130px}
+.fill.one input{flex-basis:100%}
+.lines input{display:block;margin-bottom:2px}
+
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
+.chip{font-family:var(--sans);font-size:15px;line-height:1.3;padding:10px 15px;border-radius:999px;border:1.5px solid var(--lav);background:rgba(255,252,248,.7);color:var(--ink);min-height:44px;text-align:left}
+.chip.on{background:var(--lav);border-color:var(--lav-d);font-weight:600}
+.chips.frases .chip{border-radius:16px}
+
+.sl{display:flex;align-items:center;gap:10px;margin-top:6px}
+.sl input{flex:1;accent-color:var(--gold-t);height:34px}
+.sl span{font-family:var(--sans);font-size:12px;color:var(--muted);width:64px;line-height:1.2}
+.sl .hi{text-align:right}
+input[type=range].un{opacity:.55}
+.val{font-family:var(--sans);font-size:13px;color:var(--gold-t);text-align:center}
+
+.ck{display:flex;gap:12px;align-items:flex-start;padding:10px 4px;min-height:48px;font-size:17px;line-height:1.45}
+.ck input{flex:none;width:26px;height:26px;margin:2px 0 0;accent-color:var(--gold-t)}
+.pair{border-left:3px solid var(--gold-l);padding:0 0 4px 14px;margin:20px 0}
+.pair .fld{margin:8px 0}
+.perf{margin:20px 0;padding-bottom:6px;border-bottom:1px dashed var(--gold-l)}
+
+/* lista de tareas */
+.tl ul{list-style:none;margin:8px 0;padding:0}
+.tl li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:17px;line-height:1.4}
+.tl li input{width:24px;height:24px;accent-color:var(--gold-t);flex:none}
+.tl li span{flex:1}
+.tl li.dn span{text-decoration:line-through;color:var(--muted)}
+.tl li em{font-family:var(--sans);font-size:12px;font-style:normal;background:var(--sky);padding:3px 9px;border-radius:999px}
+.tl li button{border:0;background:transparent;font-size:22px;color:var(--muted);min-width:40px;min-height:40px}
+.tl .add{display:flex;gap:8px;align-items:center;margin-top:10px}
+.tl .add input[type=text]{flex:1}
+.tl .add select{width:auto;font-family:var(--sans);font-size:15px;border:1px solid var(--line);border-radius:10px;padding:9px 6px;background:var(--paper)}
+.tl .add button{border:0;background:var(--lav-d);color:#fff;border-radius:12px;font-size:22px;min-width:46px;min-height:46px}
+.tl .empty{font-family:var(--sans);font-size:14px;color:var(--muted)}
+
+/* respiración y timer */
+.breath{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 0;margin:10px 0;border-radius:20px;background:linear-gradient(180deg,rgba(217,233,242,.5),rgba(221,213,238,.45))}
+.orb{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--lav) 70%);border:1px solid var(--gold-l);transform:scale(.7);transition:transform 4s ease-in-out}
+.orb.in{transform:scale(1.35);transition-duration:4s}
+.orb.out{transform:scale(.7);transition-duration:6s}
+.bt{font-size:20px;font-style:italic;min-height:30px;text-align:center;padding:0 12px}
+.timer{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-radius:16px;background:rgba(232,214,174,.3);margin:10px 0}
+.timer .t{font-family:var(--sans);font-size:32px;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.timer .bs{display:flex;gap:8px}
+.note{font-family:var(--sans);font-size:15px;line-height:1.6;padding:14px 16px;border-radius:14px;background:rgba(217,233,242,.55);margin:18px 0}
+.note.vis{font-family:var(--serif);font-size:18px;font-style:italic;background:rgba(221,213,238,.45)}
+
+/* acción, cierre, ánimo */
+.act{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:20px;background:rgba(235,208,209,.4);margin:16px 0}
+.act input{flex:none;width:28px;height:28px;accent-color:var(--gold-t);margin-top:3px}
+.act b{font-family:var(--sans);font-size:14px;font-weight:600;display:block;margin-bottom:2px;color:var(--rose-d)}
+.closing{text-align:center;font-style:italic;font-size:21px;line-height:1.5;padding:28px 10px 6px}
+.closing svg{display:block;margin:0 auto 10px}
+.mood{margin-top:28px;padding-top:6px}
+.moods{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:10px 0}
+.mo{border:1.5px solid var(--line);background:var(--paper);border-radius:14px;padding:9px 2px 7px;font-size:24px;line-height:1.2;color:var(--ink)}
+.mo small{display:block;font-family:var(--sans);font-size:11px;color:var(--muted);margin-top:2px}
+.mo.on{border-color:var(--gold);background:var(--gold-l)}
+.dn-row{margin-top:28px;text-align:center}
+
+/* navegación inferior de página */
+.pn{display:flex;justify-content:space-between;gap:10px;margin:40px 0 0}
+.pn .btn{flex:1;font-size:15px;padding:13px 10px;min-height:48px;background:transparent;color:var(--ink);border:1.5px solid var(--lav)}
+.pn .btn.nx{background:var(--lav-d);color:#fff;border-color:var(--lav-d)}
+
+/* semana */
+.week{display:flex;gap:6px;align-items:flex-end;margin:14px 0 4px}
+.wk{flex:1;text-align:center;font-family:var(--sans);font-size:12px;color:var(--muted)}
+.wk .bar{height:90px;background:rgba(221,213,238,.35);border-radius:8px;display:flex;align-items:flex-end;overflow:hidden}
+.wk .bar i{display:block;width:100%;background:var(--lav-d);opacity:.75;border-radius:6px 6px 0 0}
+.wk b{display:block;font-weight:600;color:var(--ink);margin-top:4px}
+.wk span{font-size:16px}
+.big .wk .bar{height:70px}
+
+/* mapa */
+.bar-p{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:10px 0 4px}
+.bar-p i{display:block;height:100%;background:linear-gradient(90deg,var(--rose),var(--lav-d))}
+.mapa a.dl{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);padding:12px 4px;border-bottom:1px solid var(--line);min-height:54px}
+.mapa .nb{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--gold-l);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:14px}
+.mapa .nb.ok{background:var(--gold-l);border-color:var(--gold)}
+.mapa .tt{flex:1;line-height:1.3}
+.wkh{margin:30px 0 4px}
+.wkh h2{font-size:22px}
+
+/* menú lateral */
+#menu{position:fixed;inset:0;z-index:40;display:none}
+#menu.open{display:block}
+#menu .sc{position:absolute;inset:0;background:rgba(58,52,64,.4)}
+#menu .pn2{position:absolute;top:0;bottom:0;left:0;width:min(88vw,360px);background:var(--cream);padding:calc(env(safe-area-inset-top,0px) + 16px) 18px calc(env(safe-area-inset-bottom,0px) + 20px);overflow:auto;box-shadow:6px 0 30px rgba(58,52,64,.18)}
+#menu h3{font-size:20px;margin:0 0 10px;color:var(--gold-t);font-style:italic}
+#menu a.ml{display:block;padding:11px 6px;color:var(--ink);text-decoration:none;font-size:17px;border-bottom:1px solid var(--line)}
+#menu .dg{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin:14px 0}
+#menu .dg a{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--lav);border-radius:50%;font-family:var(--sans);font-size:14px;text-decoration:none;color:var(--ink)}
+#menu .dg a.ok{background:var(--gold-l);border-color:var(--gold)}
+#menu .dg a.cur{outline:2px solid var(--lav-d);outline-offset:2px}
+#menu .rs{margin-top:18px;font-family:var(--sans);font-size:13px;color:var(--muted);background:none;border:0;text-decoration:underline;padding:8px 0}
+
+.disc{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.55;border-top:1px solid var(--line);margin-top:34px;padding-top:14px}
+.sig{font-style:italic;font-size:22px;color:var(--gold-t);margin-top:18px}
+.two{display:grid;gap:12px}
+.tool{margin:8px 0 0;padding-left:0;list-style:none}
+.tool li{padding:8px 0 8px 0;border-bottom:1px solid var(--line)}
+.stp{counter-reset:s;list-style:none;padding:0;margin:14px 0}
+.stp li{counter-increment:s;position:relative;padding:8px 0 8px 46px;font-size:17px;line-height:1.55}
+.stp li:before{content:counter(s);position:absolute;left:0;top:6px;width:32px;height:32px;border-radius:50%;background:var(--lav);font-family:var(--sans);font-size:14px;display:flex;align-items:center;justify-content:center}
+.grid30{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:10px 0}
+.grid30 label{display:flex;flex-direction:column;align-items:center;font-family:var(--sans);font-size:11px;color:var(--muted);gap:3px}
+.grid30 input{width:26px;height:26px;accent-color:var(--gold-t)}
+.cmp{margin:16px 0;padding-bottom:6px;border-bottom:1px dashed var(--gold-l)}
+.cmp .was{font-family:var(--sans);font-size:14px;color:var(--muted)}
+
+@media (min-width:700px){body{font-size:19px}.cover{border-radius:0 0 30px 30px}}
+@media (prefers-reduced-motion:reduce){.orb{transition:none!important}html{scroll-behavior:auto}}
+@media print{#bar,#menu,.pn,.dn-row,.btn,.breath,.timer{display:none!important}body{background:#fff}.cover{min-height:auto;page-break-after:always}.card{break-inside:avoid}}
+#sosf{position:fixed;right:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:15;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;background:var(--rose);border:1.5px solid var(--gold);border-radius:999px;padding:10px 15px;min-height:44px;box-shadow:0 6px 18px rgba(58,52,64,.18)}
+</style>
+</head>
+<body>
+<header id="bar" class="hide">
+  <button class="ibtn" data-act="menu" aria-label="Abrir el índice">☰ Índice</button>
+  <span class="brand">NatyCoach</span>
+  <span id="prog" aria-live="polite"></span>
+</header>
+<div id="menu" aria-hidden="true"><div class="sc" data-act="close"></div><nav class="pn2" id="menuIn"></nav></div>
+<main id="app"></main>
+<script>
+"use strict";
+/* ---------- estado y guardado local ---------- */
+var KEY="natycoach_ordena_tu_mente_v1", S={}, MEM=false;
+try{ S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ S={}; MEM=true; }
+var saveT=null;
+function flushSave(){ clearTimeout(saveT); saveT=null; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ MEM=true; } }
+function save(immediate){ clearTimeout(saveT); if(immediate){ flushSave(); return; } saveT=setTimeout(flushSave,250); }
+["visibilitychange","pagehide","blur"].forEach(function(ev){
+  (ev==="blur"?window:document).addEventListener(ev,function(){ if(ev!=="visibilitychange"||document.hidden) flushSave(); });
+});
+function get(k,d){ return (S[k]===undefined||S[k]===null)?d:S[k]; }
+function set(k,v){ S[k]=v; save(true); }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function $(s,r){ return (r||document).querySelector(s); }
+function $$(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
+
+var MOODS=[{e:"🌧️",l:"Pesada"},{e:"🌫️",l:"Cansada"},{e:"⛅",l:"Así así"},{e:"🌤️",l:"Mejor"},{e:"✨",l:"Liviana"}];
+
+/* ---------- ornamentos ---------- */
+var BF='<g><path d="M0 0C-14-22-38-18-33-2C-30 9-12 9 0 0Z"/><path d="M0 0C14-22 38-18 33-2C30 9 12 9 0 0Z"/><path d="M0 1C-11 7-24 20-15 26C-8 30-2 15 0 1Z"/><path d="M0 1C11 7 24 20 15 26C8 30 2 15 0 1Z"/></g><path d="M0-4V16" stroke="#86672E" stroke-width="1.2" fill="none"/><path d="M0-4C-3-12-7-14-9-15M0-4C3-12 7-14 9-15" stroke="#86672E" stroke-width=".9" fill="none"/>';
+function spark(x,y,s,o){ return '<path transform="translate('+x+' '+y+') scale('+s+')" d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" fill="#B8935A" opacity="'+(o||.8)+'"/>'; }
+function coverArt(){
+  return '<svg class="orn" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'+
+  '<defs><mask id="mk"><rect width="200" height="200" fill="#fff"/><circle cx="74" cy="40" r="40" fill="#000"/></mask></defs>'+
+  '<g transform="translate(262 78) rotate(14) scale(.62)"><circle cx="50" cy="50" r="42" fill="#C9A96B" opacity=".9" mask="url(#mk)"/></g>'+
+  '<g fill="#DDD5EE" stroke="#B8935A" stroke-width=".8" transform="translate(70 170) rotate(-18) scale(1.1)" opacity=".95">'+BF+'</g>'+
+  '<g fill="#EBD0D1" stroke="#B8935A" stroke-width=".8" transform="translate(322 690) rotate(20) scale(.85)" opacity=".95">'+BF+'</g>'+
+  '<g fill="#D9E9F2" stroke="#B8935A" stroke-width=".8" transform="translate(64 748) rotate(-8) scale(.6)" opacity=".9">'+BF+'</g>'+
+  spark(330,190,1.2,.9)+spark(40,640,.9,.7)+spark(372,610,.7,.7)+spark(200,776,.8,.6)+spark(110,100,.6,.7)+spark(30,60,.5,.6)+
+  '<path d="M-10 640C60 610 110 670 190 650S330 600 410 632" fill="none" stroke="#B8935A" stroke-width=".9" opacity=".55"/>'+
+  '<path d="M-10 664C70 640 120 700 200 678S330 626 410 656" fill="none" stroke="#B8935A" stroke-width=".6" opacity=".35"/>'+
+  '<g transform="translate(196 716)" opacity=".85"><g fill="#EBD0D1"><circle cx="0" cy="-9" r="6"/><circle cx="8.5" cy="-3" r="6"/><circle cx="5" cy="7" r="6"/><circle cx="-5" cy="7" r="6"/><circle cx="-8.5" cy="-3" r="6"/></g><circle r="4" fill="#C9A96B"/></g>'+
+  '<g transform="translate(120 700) scale(.8)" opacity=".8"><g fill="#DDD5EE"><circle cx="0" cy="-9" r="6"/><circle cx="8.5" cy="-3" r="6"/><circle cx="5" cy="7" r="6"/><circle cx="-5" cy="7" r="6"/><circle cx="-8.5" cy="-3" r="6"/></g><circle r="4" fill="#C9A96B"/></g>'+
+  '</svg>';
+}
+function moonMini(){ return '<svg width="26" height="26" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="mm"><rect width="100" height="100" fill="#fff"/><circle cx="66" cy="40" r="34" fill="#000"/></mask></defs><circle cx="46" cy="52" r="36" fill="#C9A96B" mask="url(#mm)"/></svg>'; }
+function circleArt(){
+  return '<svg viewBox="0 0 300 200" width="100%" style="max-width:340px;display:block;margin:8px auto 4px" aria-hidden="true">'+
+  '<ellipse cx="150" cy="100" rx="140" ry="94" fill="#D9E9F2" opacity=".75"/>'+
+  '<ellipse cx="150" cy="100" rx="98" ry="66" fill="#DDD5EE" opacity=".9"/>'+
+  '<ellipse cx="150" cy="100" rx="52" ry="36" fill="#EBD0D1"/>'+
+  '<text x="150" y="105" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#3A3440">Depende de mí</text>'+
+  '<text x="150" y="44" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#3A3440">Puedo influir</text>'+
+  '<text x="150" y="14" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#3A3440">No depende de mí</text></svg>';
+}
+
+/* ---------- componentes ---------- */
+function ta(id,label,ph,rows,tone){
+  return '<div class="fld'+(tone?' t-'+tone:'')+'"><label for="'+id+'">'+label+'</label><textarea id="'+id+'" data-k="'+id+'" data-t="ta" rows="'+(rows||3)+'" placeholder="'+esc(ph||"")+'">'+esc(get(id,""))+'</textarea></div>';
+}
+function lines(id,label,n,ph){
+  var h='<div class="fld lines"><label>'+label+'</label>';
+  for(var i=0;i<n;i++){ h+='<input type="text" data-k="'+id+'_'+i+'" data-t="tx" placeholder="'+esc(ph||(i+1)+".")+'" value="'+esc(get(id+"_"+i,""))+'" aria-label="'+esc(label)+' '+(i+1)+'">'; }
+  return h+'</div>';
+}
+function chips(id,label,opts,multi,cls){
+  var cur=get(id,multi?[]:""), h='<div class="fld">'+(label?'<label>'+label+(multi?'<span class="small" style="font-weight:400"> (podés marcar varias)</span>':'')+'</label>':'')+'<div class="chips '+(cls||"")+'" data-chips="'+id+'" data-multi="'+(multi?1:0)+'">';
+  opts.forEach(function(o){ var on=multi?(cur.indexOf(o)>-1):(cur===o); h+='<button type="button" class="chip'+(on?' on':'')+'" data-v="'+esc(o)+'" aria-pressed="'+on+'">'+esc(o)+'</button>'; });
+  return h+'</div></div>';
+}
+function slider(id,label,lo,hi,min,max){
+  min=min==null?0:min; max=max==null?10:max; var v=get(id,null);
+  return '<div class="fld"><label>'+label+'</label><div class="sl"><span>'+esc(lo||"")+'</span><input type="range" min="'+min+'" max="'+max+'" step="1" data-k="'+id+'" data-t="sl" value="'+(v==null?Math.round((min+max)/2):v)+'" class="'+(v==null?'un':'')+'" aria-label="'+esc(label)+'"><span class="hi">'+esc(hi||"")+'</span></div><div class="val" id="'+id+'_v">'+(v==null?'Deslizá para marcar':v+' / '+max)+'</div></div>';
+}
+function checks(id,items){
+  var h='<div class="fld">';
+  items.forEach(function(t,i){ var k=id+'_'+i; h+='<label class="ck"><input type="checkbox" data-k="'+k+'" data-t="ck"'+(get(k,false)?' checked':'')+'><span>'+t+'</span></label>'; });
+  return h+'</div>';
+}
+function fill(id,items){
+  var h='';
+  items.forEach(function(s,i){
+    var parts=s.split("___"), one=parts.length===2&&!parts[1].trim();
+    h+='<div class="fill'+(one?' one':'')+'">';
+    for(var j=0;j<parts.length;j++){
+      if(parts[j].trim()) h+='<span>'+parts[j]+'</span>';
+      if(j<parts.length-1){ var k=id+'_'+i+'_'+j; h+='<input type="text" data-k="'+k+'" data-t="tx" value="'+esc(get(k,""))+'" aria-label="'+esc(parts[0].trim()||"completar")+'">'; }
+    }
+    h+='</div>';
+  });
+  return h;
+}
+function pairs(id,n,labels,rows){
+  var h='';
+  for(var r=0;r<n;r++){
+    h+='<div class="pair">';
+    labels.forEach(function(l,c){ h+=ta(id+'_'+r+'_'+c,l,'',rows||2); });
+    h+='</div>';
+  }
+  return h;
+}
+function perf(id,n){
+  var h='';
+  for(var i=0;i<n;i++){
+    h+='<div class="perf"><div class="fld" style="margin:6px 0"><label for="'+id+'_a'+i+'">Un área donde me exijo de más</label><input type="text" id="'+id+'_a'+i+'" data-k="'+id+'_a'+i+'" data-t="tx" value="'+esc(get(id+'_a'+i,""))+'" placeholder="Ej.: la casa, el trabajo, cómo me ven..."></div>'+
+      slider(id+'_e'+i,'Lo que me exijo hoy','Poco','Todo',0,10)+slider(id+'_s'+i,'Lo que sería suficiente','Poco','Todo',0,10)+'</div>';
+  }
+  return h;
+}
+function taskList(id,label,ph){
+  return '<div class="fld tl" data-list="'+id+'"><label>'+label+'</label><ul></ul><div class="add"><input type="text" placeholder="'+esc(ph)+'" aria-label="Nuevo pendiente"><select aria-label="Cuánto lleva"><option>5 min</option><option>30 min</option><option>Grande</option></select><button type="button" data-act="add" aria-label="Agregar">+</button></div></div>';
+}
+function paintList(el){
+  var id=el.getAttribute("data-list"), arr=get(id,[]), ul=$("ul",el), h="";
+  if(!arr.length) h='<li class="empty" style="border:0">Todavía no anotaste nada. Escribí abajo y tocá +.</li>';
+  arr.forEach(function(it,i){ h+='<li class="'+(it.c?'dn':'')+'"><input type="checkbox" data-act="tog" data-i="'+i+'"'+(it.c?' checked':'')+' aria-label="Hecho"><span>'+esc(it.t)+'</span><em>'+esc(it.d)+'</em><button type="button" data-act="del" data-i="'+i+'" aria-label="Quitar">×</button></li>'; });
+  ul.innerHTML=h;
+}
+function breath(secs){
+  return '<div class="breath" data-breath="'+(secs||60)+'"><div class="orb"></div><div class="bt">Inhalá 4 segundos. Exhalá 6.</div><button type="button" class="btn s" data-act="breath">Comenzar ('+(secs||60)+' seg)</button></div>';
+}
+function timer(min){
+  return '<div class="timer" data-timer="'+min*60+'"><div class="t">'+(min<10?'0':'')+min+':00</div><div class="bs"><button type="button" class="btn s" data-act="tgo">Iniciar</button><button type="button" class="btn s o" style="background:transparent" data-act="trs">Reiniciar</button></div></div>';
+}
+function note(t,vis,links){
+  var h='<div class="note'+(vis?' vis':'')+'">'+t;
+  if(links){ h+='<div class="stack" style="margin-top:12px;align-items:flex-start">'; links.forEach(function(l){ h+='<a class="btn s" href="#" data-go="'+l[0]+'">'+l[1]+'</a>'; }); h+='</div>'; }
+  return h+'</div>';
+}
+function week(from,to){
+  var h='<div class="week">';
+  for(var n=from;n<=to;n++){
+    var r=get('d'+n+'_ruido',null), m=get('d'+n+'_mood',null);
+    h+='<div class="wk"><div class="bar" title="Ruido mental"><i style="height:'+(r==null?0:r*10)+'%"></i></div><b>'+n+'</b><span>'+(m==null?'·':MOODS[m].e)+'</span></div>';
+  }
+  return h+'</div><p class="small">La altura de cada barra es el ruido mental que registraste ese día. Abajo, cómo te sentiste.</p>';
+}
+function clearBtn(prefix){ return '<div style="text-align:center;margin:8px 0 4px"><button type="button" class="btn s o" style="background:transparent" data-act="clear" data-p="'+prefix+'">Empezar de nuevo</button></div>'; }
+
+/* render de bloques */
+function block(b,pre){
+  var id=b.id?pre+b.id:"";
+  switch(b.k){
+    case "ta": return ta(id,b.l,b.ph,b.rows,b.tone);
+    case "lines": return lines(id,b.l,b.n,b.ph);
+    case "chips": return chips(id,b.l,b.o,b.multi,b.cls);
+    case "slider": return slider(id,b.l,b.lo,b.hi,b.min,b.max);
+    case "checks": return checks(id,b.items);
+    case "fill": return fill(id,b.items);
+    case "pairs": return pairs(id,b.n,b.labels,b.rows);
+    case "perf": return perf(id,b.n);
+    case "list": return taskList(id,b.l,b.ph);
+    case "breath": return breath(b.s);
+    case "timer": return timer(b.m);
+    case "note": return note(b.t,b.vis,b.links);
+    case "week": return week(b.a,b.b);
+    case "circle": return circleArt();
+  }
+  return "";
+}
+var WEEKS={1:{t:"Semana 1",s:"Ver lo que hay"},2:{t:"Semana 2",s:"Ordenar y elegir"},3:{t:"Semana 3",s:"Soltar y sostener"}};
+var DAYS=[
+{n:1,w:1,g:"Descargar",t:"Todo lo que llevo encima",
+ intro:"Hoy no vas a ordenar nada. Todavía no. Hoy vas a hacer algo más simple: sacar de tu cabeza todo lo que da vueltas y ponerlo en un lugar donde puedas verlo.",
+ refl:"La mente es buena para pensar, pero es un pésimo lugar para guardar cosas. Cuando todo queda adentro, todo parece igual de urgente.",
+ ex:{t:"Descarga de 5 minutos",how:"Poné el reloj en 5 minutos y escribí sin parar: pendientes, preocupaciones, cosas que te dijeron, cosas que tenés que decir, lo que no te animás a mirar. No corrijas, no ordenes, no te expliques. Si no sabés qué escribir, escribí “no sé qué escribir” hasta que aparezca algo.",
+ b:[{k:"timer",m:5},{k:"ta",id:"dump",l:"Todo lo que hay en mi cabeza",ph:"Empezá acá...",rows:9},{k:"lines",id:"top",l:"De todo eso, las 3 cosas que más pesan",n:3}]},
+ q:["¿Qué sentiste mientras escribías: alivio, cansancio, ganas de parar?","¿Qué cosa apareció más de una vez?","Al verlo todo junto, ¿es más o menos de lo que creías?","¿Qué te sorprendió de tu lista?"],
+ act:"Llevá una libreta o abrí una nota en el celular. Cada vez que un pensamiento insista hoy, anotalo ahí en lugar de guardarlo en la cabeza.",
+ close:"Lo que se ve, se puede acomodar."},
+
+{n:2,w:1,g:"Ordenar",t:"Tres cajones",
+ intro:"Cuando todo está mezclado, un pensamiento parece una tragedia y una tarea parece una amenaza. Hoy vas a separar lo que tenés en la cabeza en tres cajones, y vas a ver que casi nada es tan grande como parecía.",
+ refl:"No es lo mismo pensar algo, preocuparse por algo y tener que hacer algo. Cada una de esas cosas pide una respuesta distinta.",
+ ex:{t:"Los tres cajones",how:"Volvé a tu descarga del día 1 y repartí lo que escribiste. Pensamiento: una idea u opinión que tu mente repite (“seguro se enojó”). Preocupación: algo que imaginás que podría salir mal. Acción: algo concreto que podés hacer (“llamar al médico”).",
+ b:[{k:"ta",id:"pens",l:"Pensamientos",ph:"Ideas, opiniones, cosas que me digo...",rows:4,tone:"lav"},{k:"ta",id:"preo",l:"Preocupaciones",ph:"Lo que temo que pase...",rows:4,tone:"rose"},{k:"ta",id:"acc",l:"Acciones",ph:"Lo que puedo hacer...",rows:4,tone:"sky"}]},
+ q:["¿En qué cajón terminaste poniendo más cosas?","¿Qué pensamiento estabas tratando como si fuera un hecho?","¿Cuántas de tus preocupaciones tienen una acción posible?"],
+ act:"Elegí una sola acción del cajón de las acciones que puedas hacer en menos de 10 minutos, y hacela hoy.",
+ close:"Una cabeza ordenada no tiene menos cosas: tiene cada cosa en su lugar."},
+
+{n:3,w:1,g:"Descargar",t:"La lista real",
+ intro:"Los pendientes que viven solo en tu cabeza pesan el doble: hay que hacerlos y, además, acordarse de hacerlos. Hoy los bajás a una lista que tenga principio y fin.",
+ refl:"Tu mente no está cansada solo por todo lo que hacés. También está cansada de acordarse de todo lo que falta.",
+ ex:{t:"Mi lista de pendientes",how:"Anotá cada pendiente y elegí cuánto tiempo lleva: 5 minutos, media hora o “es grande”. Los grandes no se resuelven hoy: solo se anotan. Los de 5 minutos, sí.",
+ b:[{k:"list",id:"tareas",l:"Lo que tengo pendiente",ph:"Ej.: llamar a la escuela"}]},
+ q:["¿Cuántos de estos pendientes son realmente tuyos?","¿Cuál llevás postergando hace más tiempo? ¿Qué te frena?","¿Cuál te daría más alivio con solo terminarlo?"],
+ act:"Resolvé hoy todos los pendientes de 5 minutos que puedas y tildalos en tu lista.",
+ close:"Tachar algo también es una forma de cuidarte."},
+
+{n:4,w:1,g:"Ordenar",t:"El pensamiento que da vueltas",
+ intro:"Casi todas tenemos un pensamiento favorito para dar vueltas. Hoy lo vas a identificar, no para pelearte con él, sino para reconocerlo cuando aparezca.",
+ refl:"Un pensamiento repetido no se vuelve más cierto por insistir. Solo se vuelve más conocido.",
+ ex:{t:"Mis pensamientos en loop",how:"Tocá los que te suenan familiares. Después elegí el que más vuelve y escribilo con tus palabras.",
+ b:[{k:"chips",id:"loops",l:"Los que me suenan",multi:true,o:["¿Y si sale mal?","Tendría que haber…","No llego a todo","Soy responsable de que todos estén bien","Seguro piensan que…","Nunca es suficiente","No puedo parar ahora","Si no lo hago yo, no se hace","Todavía no estoy lista","Ya debería estar mejor"]},
+ {k:"ta",id:"main",l:"El pensamiento que más vuelve",ph:"Con mis palabras...",rows:3},{k:"fill",id:"f",items:["Suele aparecer cuando ___","Mi cuerpo lo siente en ___"]}]},
+ q:["¿Desde cuándo te acompaña este pensamiento?","¿De qué intenta protegerte?","¿Qué le dirías si se lo escucharas decir a una amiga?"],
+ act:"Cuando aparezca hoy, decite: “Ah, ahí está mi pensamiento de…” y ponele nombre. Nombrarlo te da un poco de distancia.",
+ close:"Vos no sos cada pensamiento que pasa por tu cabeza."},
+
+{n:5,w:1,g:"Descargar",t:"La pausa de un minuto",
+ intro:"Además de la cabeza, el cuerpo carga. Hombros altos, mandíbula apretada, respiración corta. Hoy vas a hacer algo muy simple: parar un minuto y ver qué cambia.",
+ refl:"Pausar no es perder el tiempo. Es darle a tu cuerpo un lugar donde bajar un cambio.",
+ ex:{t:"Pausa consciente",how:"Primero marcá dónde sentís tensión y cuánta hay. Después seguí el círculo durante un minuto: inhalás mientras se agranda, exhalás mientras se achica. Al terminar, volvé a medir.",
+ b:[{k:"chips",id:"zonas",l:"Dónde siento tensión",multi:true,o:["Mandíbula","Cuello","Hombros","Pecho","Estómago","Espalda","Manos","Cabeza"]},{k:"slider",id:"pre",l:"Tensión antes de la pausa",lo:"Nada",hi:"Mucha"},{k:"breath",s:60},{k:"slider",id:"post",l:"Tensión después de la pausa",lo:"Nada",hi:"Mucha"}]},
+ q:["¿Qué cambió, aunque sea un poquito?","¿En qué momento del día tu cuerpo te pide más pausas?","¿Qué te impide parar un minuto: el tiempo, la culpa, la costumbre?"],
+ act:"Hacé tres pausas de un minuto hoy: al despertar, a media tarde y antes de dormir.",
+ close:"Un minuto de pausa alcanza para volver a mí."},
+
+{n:6,w:1,g:"Ordenar",t:"Lo que hay debajo del ruido",
+ intro:"A veces el ruido no es falta de orden: es una emoción que no encontró lugar. Hoy vas a ponerle nombre a lo que hay debajo de tus pensamientos.",
+ refl:"Muchos de los pensamientos que no paran son emociones que todavía no fueron escuchadas.",
+ ex:{t:"Completá las frases",how:"Elegí las emociones que te suenan y después completá las frases sin pensar demasiado. Lo primero que aparezca sirve.",
+ b:[{k:"chips",id:"emo",l:"Lo que puede estar debajo",multi:true,o:["Cansancio","Culpa","Miedo","Enojo","Tristeza","Soledad","Exigencia","Incertidumbre","Frustración","Ganas de que alguien me cuide","Nostalgia","Alivio"]},
+ {k:"fill",id:"f",items:["Debajo de mi preocupación más grande hay ___","Lo que esa emoción necesita es ___","Hace mucho que no me permito ___","Hoy puedo darme un poco de ___"]}]},
+ q:["¿Qué emoción venís evitando?","¿Dónde aprendiste que esa emoción no era bienvenida?","¿Quién en tu vida podría escucharte sin querer arreglarte?"],
+ act:"Ponele nombre a una emoción en voz alta o por escrito, a vos o a alguien de confianza: “Hoy me siento…”.",
+ close:"Sentir no es un problema para resolver: es información para escuchar."},
+
+{n:7,w:1,g:"Elegir",t:"Mi primera semana",
+ intro:"Llegaste al final de la primera semana. Hoy no hay nada nuevo que hacer: solo mirar hacia atrás y ver qué se movió.",
+ refl:"El cambio no siempre se nota de un día al otro. Se nota cuando mirás la semana entera.",
+ ex:{t:"Mirar la semana",how:"Fijate cómo te fue sintiendo día a día y respondé con calma. Al final elegí una intención para la semana que viene.",
+ b:[{k:"week",a:1,b:7},{k:"ta",id:"desc",l:"Lo que descubrí esta semana",rows:3},{k:"ta",id:"sac",l:"Lo que más peso me sacó",rows:2},{k:"ta",id:"sig",l:"Lo que todavía pesa",rows:2},{k:"chips",id:"int",l:"Mi intención para la semana 2",o:["Ordenar","Priorizar","Pedir ayuda","Poner un límite","Descansar sin culpa","Ir más despacio"]}]},
+ q:["¿Qué patrón viste repetirse en tus pensamientos?","¿Qué práctica te resultó más fácil? ¿Cuál más difícil?","¿Qué te gustaría que la segunda semana te ayude a resolver?"],
+ act:"Regalate hoy algo pequeño que disfrutes, sin justificarlo: un té, una canción, un baño.",
+ close:"Ya hiciste lo más difícil: empezar a mirar."}
+];
+DAYS=DAYS.concat([
+{n:8,w:2,g:"Ordenar",t:"Lo que depende de mí",
+ intro:"Gran parte del cansancio mental viene de ocuparnos de cosas que no podemos controlar. Hoy vas a redibujar el mapa: qué es tuyo, qué podés influir y qué no.",
+ refl:"No se trata de que nada te importe. Se trata de poner tu energía donde de verdad puede hacer algo.",
+ ex:{t:"Mi círculo de control",how:"Tomá tus preocupaciones de la semana pasada y ubicalas donde corresponda: en el centro, lo que depende de vos; en el medio, lo que podés influir pero no decidir; afuera, lo que no depende de vos.",
+ b:[{k:"circle"},{k:"ta",id:"centro",l:"Depende de mí",ph:"Lo que sí puedo decidir o hacer...",rows:3,tone:"rose"},{k:"ta",id:"medio",l:"Puedo influir",ph:"Lo que puedo pedir, proponer, acompañar...",rows:3,tone:"lav"},{k:"ta",id:"fuera",l:"No depende de mí",ph:"Lo que no puedo controlar...",rows:3,tone:"sky"}]},
+ q:["¿En qué círculo gastás más energía?","¿Qué cambiaría si dejaras de cargar una sola cosa del círculo de afuera?","¿Qué pequeña acción podés hacer con algo del círculo del centro?"],
+ act:"Elegí una preocupación del círculo de afuera y decile: “Hoy esto no me toca resolverlo”.",
+ close:"Soltar lo que no depende de mí me deja más fuerza para lo que sí."},
+
+{n:9,w:2,g:"Elegir",t:"Solo lo esencial",
+ intro:"Cuando todo es importante, nada lo es. Hoy vas a elegir lo que de verdad merece tu energía, sin culpa por lo que queda afuera.",
+ refl:"Elegir también es decidir qué no. Cada sí a algo esencial implica un no a algo que puede esperar.",
+ ex:{t:"La regla de tres",how:"Si mañana solo pudieras hacer tres cosas y sentir que el día valió la pena, ¿cuáles serían? Lo demás no desaparece: se ordena en los otros dos lugares.",
+ b:[{k:"lines",id:"esen",l:"Mis 3 esenciales",n:3},{k:"ta",id:"espera",l:"Puede esperar (con fecha)",rows:3},{k:"ta",id:"soltar",l:"Puedo delegar o soltar",rows:3}]},
+ q:["¿Qué hace que algo sea esencial para vos, y no solo para los demás?","¿Qué te da culpa dejar para después? ¿De quién es esa culpa?","¿A quién podrías pedirle una ayuda concreta esta semana?"],
+ act:"Hacé tu primera cosa esencial en la primera hora libre que tengas hoy.",
+ close:"No tengo que hacerlo todo. Tengo que hacer lo que importa."},
+
+{n:10,w:2,g:"Elegir",t:"El primer paso, chiquito",
+ intro:"Lo que no sabemos cómo empezar se queda dando vueltas en la cabeza. Hoy elegís algo que te abruma y lo convertís en un paso concreto.",
+ refl:"La confusión no se resuelve pensando más. Se resuelve haciendo algo chiquito.",
+ ex:{t:"De la nebulosa al paso",how:"Elegí una sola cosa que te abruma. Escribila en una frase, dividila en tres pasos pequeños y quedate con el más chiquito: el que puedas hacer en diez minutos.",
+ b:[{k:"ta",id:"nebu",l:"Lo que me abruma, en una frase",rows:2},{k:"lines",id:"pasos",l:"Tres pasos posibles",n:3},{k:"ta",id:"primero",l:"Mi primer paso (10 minutos)",rows:2,tone:"gold"},{k:"fill",id:"f",items:["Lo voy a hacer el ___ a las ___"]}]},
+ q:["¿Qué pasaría si solo hicieras ese primer paso y nada más?","¿Qué es lo que realmente te frena: falta de información, de tiempo o miedo?","¿Qué ayuda o recurso necesitás?"],
+ act:"Hacé ese primer paso hoy, aunque sean solo diez minutos.",
+ close:"Empezar chiquito también es empezar."},
+
+{n:11,w:2,g:"Elegir",t:"Cómo me hablo",
+ intro:"Mucho del ruido mental es la voz con la que te hablás. Hoy la vas a escuchar con atención y vas a probar otra manera de decirte las cosas.",
+ refl:"Si le hablaras a una amiga como te hablás a vos, ¿seguiría siendo tu amiga?",
+ ex:{t:"Mi frase, tu frase, nuestra frase",how:"Anotá una frase dura que te decís cuando algo sale mal. Escribí qué le dirías a una amiga en tu lugar. Después armá una versión amable y a la vez realista, sin exagerar.",
+ b:[{k:"pairs",id:"p",n:3,labels:["Lo que me digo","Lo que le diría a una amiga","Mi versión amable y realista"],rows:2}]},
+ q:["¿De quién es esa voz? ¿Te suena a alguien de tu historia?","¿Qué frases te decís más seguido con “tendría que”?","¿Qué cambia cuando pasás de “tengo que” a “elijo”?"],
+ act:"Cuando te escuches decir “tendría que…”, probá con “elijo…” o “prefiero…”, al menos una vez hoy.",
+ close:"Puedo ser exigente y amable a la vez."},
+
+{n:12,w:2,g:"Soltar",t:"Preocupaciones del futuro",
+ intro:"Gran parte de lo que nos quita el sueño todavía no pasó. Hoy vas a mirar una de esas preocupaciones con calma y a ver cuánto te toca resolver realmente hoy.",
+ refl:"Preocuparse a veces se siente como prepararse. Pero prepararse es hacer algo; preocuparse es dar vueltas.",
+ ex:{t:"La preocupación bajo la lupa",how:"Elegí una preocupación por algo que podría pasar. Respondé cada punto despacio. Al final vas a saber qué te toca hacer hoy, si es que te toca algo.",
+ b:[{k:"ta",id:"preo",l:"Lo que me preocupa que pase",rows:2},{k:"slider",id:"prob",l:"Qué probabilidad le doy",lo:"Casi imposible",hi:"Muy probable"},{k:"ta",id:"peor",l:"Lo peor que podría pasar",rows:2},{k:"ta",id:"prob2",l:"Lo más probable que pase",rows:2},{k:"ta",id:"haria",l:"Si pasara, lo que haría",rows:2},{k:"ta",id:"hoy",l:"Lo que puedo hacer hoy (o nada, y está bien)",rows:2,tone:"gold"}]},
+ q:["¿Qué descubriste al separar lo peor de lo más probable?","¿Esta preocupación te sirve para hacer algo, o solo te desgasta?","¿Cómo te sentís después de mirarla de frente?"],
+ act:"Agendá una “cita con tus preocupaciones”: 10 minutos a una hora fija. Fuera de esa hora, anotalas para más tarde.",
+ close:"Puedo cuidar mi futuro sin vivirlo por adelantado."},
+
+{n:13,w:2,g:"Elegir",t:"Mi no amable",
+ intro:"Cada vez que decimos que sí queriendo decir que no, algo nuestro se posterga. Hoy vas a practicar un límite pequeño, claro y sin culpa.",
+ refl:"Poner un límite no es dejar de querer. Es cuidar lo que sí podés dar.",
+ ex:{t:"Armá tu frase",how:"Elegí una situación en la que te cuesta decir que no. Después elegí o escribí una frase que suene a vos: firme, pero sin dureza.",
+ b:[{k:"ta",id:"sit",l:"Una situación en la que digo que sí y quiero decir que no",rows:3},{k:"chips",id:"frases",l:"Frases que puedo usar",cls:"frases",o:["Hoy no puedo, gracias por pensar en mí.","Lo pienso y te respondo mañana.","Ahora no me sale, ¿lo vemos otro día?","Puedo ayudarte con esto, pero no con lo otro.","Necesito un rato para mí, después hablamos."]},{k:"ta",id:"mia",l:"Mi propia versión",rows:2,tone:"rose"},{k:"fill",id:"f",items:["Si digo que no, lo que más temo es ___"]}]},
+ q:["¿A quién le cuesta más decirle que no?","¿Qué culpa aparece y qué te dice?","¿Qué te estás perdiendo cuando decís que sí a todo?"],
+ act:"Poné un límite pequeño hoy: una respuesta que postergues, una ayuda que no des, un mensaje que no contestes enseguida.",
+ close:"Un no honesto cuida más que un sí resentido."},
+
+{n:14,w:2,g:"Elegir",t:"Lo que ordené",
+ intro:"Segunda semana completada. Ya sabés qué tenés en la cabeza y empezaste a poner criterio. Hoy revisás lo ordenado y elegís qué vas a cuidar.",
+ refl:"Ordenar no es dejar todo perfecto. Es saber dónde está cada cosa.",
+ ex:{t:"Balance de la segunda semana",how:"Mirá tus días y respondé con calma. Lo importante no es cuánto hiciste, sino qué te sirvió.",
+ b:[{k:"week",a:8,b:14},{k:"lines",id:"cuidar",l:"Tres cosas que elijo cuidar",n:3},{k:"lines",id:"cargar",l:"Tres cosas que elijo dejar de cargar",n:3},{k:"ta",id:"ayudo",l:"Lo que más me ayudó esta semana",rows:3}]},
+ q:["¿Qué límite o decisión te costó más? ¿Y cuál te dio más alivio?","¿Qué hábito nuevo ya notás en tu día a día?","¿Qué querés soltar en la tercera semana?"],
+ act:"Contale a alguien de confianza una cosa que descubriste sobre vos en estas dos semanas.",
+ close:"Estoy aprendiendo a elegir, y eso ya es un cambio."}
+]);
+DAYS=DAYS.concat([
+{n:15,w:3,g:"Soltar",t:"Suficientemente bien",
+ intro:"El perfeccionismo cansa porque la vara siempre se mueve. Hoy vas a elegir en qué lugares dejar de exigirte de más.",
+ refl:"Hacerlo suficientemente bien también es hacerlo bien. Y te deja energía para todo lo demás.",
+ ex:{t:"Mi vara de exigencia",how:"Anotá tres áreas donde te exigís de más. En cada una, marcá qué nivel te pedís hoy y qué nivel sería suficiente.",
+ b:[{k:"perf",id:"pf",n:3}]},
+ q:["¿De quién es la vara que estás intentando alcanzar?","¿Qué pasaría, realmente, si algo saliera al 80%?","¿Qué podrías hacer con la energía que te sobraría?"],
+ act:"Elegí una tarea de hoy y terminala al 80%: cuando esté “bastante bien”, decí “está listo” y pasá a otra cosa.",
+ close:"Suficiente ya es mucho."},
+
+{n:16,w:3,g:"Soltar",t:"Carta de perdón",
+ intro:"Hay cosas de las que todavía te estás juzgando. Hoy vas a escribirte una carta como se la escribirías a alguien que querés.",
+ refl:"Perdonarte no es decir que estuvo bien. Es dejar de cargar con la versión más dura de vos.",
+ ex:{t:"Carta a mí misma",how:"Elegí algo de lo que te estés reprochando. Usá las frases de inicio como apoyo y seguí con tus palabras. Si aparece algo muy fuerte, podés frenar cuando quieras.",
+ b:[{k:"ta",id:"ref",l:"Lo que me estoy reprochando",rows:2},{k:"ta",id:"carta",l:"Querida yo:",ph:"Entiendo por qué...  En ese momento hacías lo mejor que podías con lo que tenías...  Hoy quiero decirte...",rows:10,tone:"lav"},{k:"fill",id:"f",items:["Hoy me perdono por ___"]},{k:"note",t:"Si al escribir aparece algo que te desborda, frená y compartilo con un profesional de la salud mental o con alguien de confianza. Pedir acompañamiento también es cuidarte."}]},
+ q:["¿Qué sentiste al escribirte con tanta amabilidad?","¿Qué es lo que más te cuesta perdonarte?","¿Qué necesitás para seguir adelante?"],
+ act:"Guardá una frase de tu carta en un lugar visible: el espejo, el celular, la agenda.",
+ close:"Puedo soltar lo que hice y quedarme con lo que aprendí."},
+
+{n:17,w:3,g:"Elegir",t:"Un espacio que es mío",
+ intro:"Descansar no es un premio para cuando termines todo. Hoy vas a reservarte un espacio real, tuyo, y a escuchar qué voz aparece cuando lo hacés.",
+ refl:"Si esperás a que todo esté terminado para descansar, nunca vas a descansar.",
+ ex:{t:"Mi espacio",how:"Elegí qué querés hacer, cuánto tiempo y cuándo. Después escribí la frase de culpa que aparece y una respuesta amable para ella.",
+ b:[{k:"chips",id:"act",l:"Lo que me gustaría hacer",multi:true,o:["Caminar sin destino","Un té sin celular","Un baño sin apuro","Escuchar música","Leer unas páginas","Cocinar o dibujar algo","No hacer nada","Hablar con una amiga"]},{k:"fill",id:"f",items:["Voy a dedicarme ___ minutos","Lo voy a hacer el ___ a las ___","Mi culpa me dice ___","Yo le respondo ___"]}]},
+ q:["¿Cuándo fue la última vez que hiciste algo solo por placer?","¿Qué creencia tenés sobre el descanso?","¿Qué necesitás organizar para que ese espacio sea posible?"],
+ act:"Hacé tu espacio hoy, o agendalo como si fuera una cita con alguien importante.",
+ close:"Cuidarme me permite cuidar mejor."},
+
+{n:18,w:3,g:"Soltar",t:"Cerrar el día",
+ intro:"Muchas noches el cuerpo ya está en la cama y la cabeza sigue trabajando. Hoy armás un ritual para cerrar el día y bajar el ruido del celular.",
+ refl:"Un día que no se cierra se derrama sobre la noche. Cerrar es decirle a tu mente: por hoy, terminamos.",
+ ex:{t:"Mi ritual de cierre",how:"Elegí lo que sí vas a hacer esta noche. Después completá tu cierre en tres líneas.",
+ b:[{k:"checks",id:"rit",items:["Dejar el celular cargando lejos de la cama","Silenciar grupos y notificaciones de noche","Anotar las 3 cosas más importantes de mañana","Apagar pantallas 30 minutos antes de dormir","Tomar algo tibio","Hacer tres respiraciones largas"]},{k:"slider",id:"cel",l:"Cuánto ruido me llega por el celular",lo:"Poco",hi:"Mucho"},{k:"ta",id:"hice",l:"Lo que hice hoy, aunque sea poco",rows:2},{k:"ta",id:"manana",l:"Lo que dejo anotado para mañana",rows:2},{k:"note",t:"Cuando termines de anotarlo, decite en voz baja: “Por hoy, terminé. Lo que queda es para mañana.”",vis:true}]},
+ q:["¿Qué apps, grupos o noticias te llenan la cabeza sin aportarte nada?","¿Qué hacés cuando soltás el celular?","¿Cómo te sentís al cerrar el día de manera consciente?"],
+ act:"Hacé tu ritual de cierre esta noche, aunque sea con solo dos de los pasos.",
+ close:"Mañana es otro día, y por hoy ya alcanzó."},
+
+{n:19,w:3,g:"Elegir",t:"Gratitud con verdad",
+ intro:"Agradecer no significa negar lo que cuesta. Hoy practicás una gratitud honesta: la que puede convivir con el cansancio, la preocupación y todo lo demás.",
+ refl:"Puedo estar agradecida y estar cansada. Las dos cosas pueden ser verdad al mismo tiempo.",
+ ex:{t:"Gracias, y también",how:"En cada bloque, escribí algo por lo que estás agradecida y, debajo, lo que todavía te cuesta. No hay que elegir una de las dos.",
+ b:[{k:"pairs",id:"p",n:3,labels:["Estoy agradecida por…","Y al mismo tiempo me cuesta…"],rows:2}]},
+ q:["¿Qué persona o momento de esta semana te hizo bien?","¿Qué agradecimiento hacia vos misma te faltaba?","¿Cambió algo al poder nombrar las dos cosas?"],
+ act:"Escribile o decile gracias a alguien que hizo algo por vos, con un detalle concreto.",
+ close:"La gratitud no tapa lo difícil: lo acompaña."},
+
+{n:20,w:3,g:"Elegir",t:"Mi mente en calma",
+ intro:"Hoy imaginás cómo es tu mente cuando está en orden y elegís una palabra que te guíe en los próximos días.",
+ refl:"Lo que podés imaginar con detalle, lo podés reconocer cuando aparece.",
+ ex:{t:"Visualización y palabra guía",how:"Sentate cómoda. Leé la guía despacio, o grabala en tu celular para escucharla. Después escribí lo que apareció y elegí tu palabra.",
+ b:[{k:"note",t:"Cerrá los ojos. Respirá hondo tres veces. Imaginá tu mente como una habitación. ¿Qué luz tiene? ¿Qué hay adentro y qué ya no está? Fijate cómo se siente el aire, el silencio. Quedate ahí un minuto.",vis:true},{k:"breath",s:60},{k:"ta",id:"imagen",l:"Mi mente en calma se parece a…",rows:4},{k:"chips",id:"palabra",l:"Mi palabra guía",o:["Claridad","Pausa","Límite","Permiso","Presencia","Simpleza","Descanso","Confianza"]},{k:"fill",id:"f",items:["Mi intención para el próximo mes es ___"]}]},
+ q:["¿Qué hay en tu mente en calma que hoy falta?","¿Qué es lo que ya no está?","¿Qué pequeño gesto diario te acerca a ese lugar?"],
+ act:"Escribí tu palabra guía en un papel y ponelo donde lo veas todos los días.",
+ close:"Mi mente en calma no es un lugar lejano: es un lugar al que puedo volver."},
+
+{n:21,w:3,g:"Soltar",t:"Elijo qué cuido y qué suelto",
+ intro:"Llegaste al día 21. No hace falta que tengas todo resuelto: alcanza con que sepas un poco más de vos y de lo que necesitás. Hoy cerrás este proceso.",
+ refl:"No necesitás controlar cada pensamiento para vivir con más claridad. Necesitás elegir qué hacer con lo que aparece.",
+ ex:{t:"Mi cierre",how:"Volvé a mirar tus días y respondé con calma. Después medí cómo estás hoy en tu registro de progreso.",
+ b:[{k:"lines",id:"cuido",l:"Lo que quiero cuidar",n:3},{k:"lines",id:"suelto",l:"Lo que necesito soltar",n:3},{k:"ta",id:"llevo",l:"Lo que me llevo de estos 21 días",rows:4},{k:"fill",id:"f",items:["Mi compromiso pequeño para los próximos 30 días es ___"]},{k:"note",t:"Dos pasos más para cerrar el proceso: medí cómo llegás hoy y armá tu plan para seguir.",links:[["registro","Ir a mi registro de progreso"],["continuar","Armar mi plan para continuar"]]}]},
+ q:["¿Qué descubriste de vos que no sabías?","¿Qué práctica querés seguir haciendo?","¿Qué le dirías hoy a la mujer que empezó el día 1?"],
+ act:"Contale a alguien lo que aprendiste, o escribite un mensaje para leer dentro de un mes.",
+ close:"Elegí qué hacer con lo que aparece. Eso también es claridad."}
+]);
+var GST=["Descargar","Ordenar","Elegir","Soltar"];
+function pnav(id){
+  var i=ORDER.indexOf(id), p=ORDER[i-1], n=ORDER[i+1], h='<div class="pn">';
+  h+= p?'<a class="btn" href="#" data-go="'+p+'">← Anterior</a>':'<span></span>';
+  h+= n?'<a class="btn nx" href="#" data-go="'+n+'">Siguiente →</a>':'<span></span>';
+  return h+'</div>';
+}
+var DISC='<p class="disc">Este cuaderno es una herramienta de autocuidado, reflexión y desarrollo personal. No es terapia, no reemplaza la atención de un profesional de la salud mental o médica, y no promete resultados. Si sentís que lo que te pasa te desborda, pedir ayuda profesional es una forma de cuidarte.</p>';
+
+var HIG=[["Hacer pausas","Parar un minuto antes de que el cuerpo te obligue."],["Ordenar pensamientos","Separar lo que pensás, lo que te preocupa y lo que podés hacer."],["Reconocer lo que sentís","Ponerle nombre a la emoción en lugar de taparla con actividad."],["Descansar","Sin culpa y sin esperar a que todo esté terminado."],["Poner límites","Decir que no a lo que no podés, para poder decir sí a lo que sí."],["Elegir dónde poner la atención","No todo lo que llega merece tu energía."],["Descargar preocupaciones","Sacarlas de la cabeza y ponerlas en papel."],["Pedir ayuda cuando hace falta","Hablar con alguien de confianza o con un profesional también es cuidado."]];
+
+var PG={};
+PG.portada=function(){
+  var seguir=get("_page","portada"), can=seguir&&seguir!=="portada";
+  return '<section class="cover">'+coverArt()+'<div class="in"><div class="by">NatyCoach</div><h1>ORDENÁ<br>TU MENTE</h1><div class="gl"></div>'+
+  '<p class="sub">Un método práctico de 21 días para bajar el ruido mental, soltar preocupaciones y recuperar claridad.</p>'+
+  '<div class="stack"><a class="btn" href="#" data-go="bienvenida">'+(can?'Empezar desde el principio':'Comenzar')+'</a>'+(can?'<a class="btn o" href="#" data-go="'+seguir+'">Seguir donde dejé</a>':'')+'</div>'+
+  '<div class="foot">Un cuaderno interactivo para escribir desde tu celular.<br>Tus respuestas se guardan en este dispositivo.</div></div></section>';
+};
+PG.bienvenida=function(){
+  return '<section class="page"><h1>Bienvenida</h1>'+
+  '<p class="lead">Hola, soy Naty.</p>'+
+  '<p>Si llegaste hasta acá, es probable que tu cabeza esté llena. De pendientes, de preocupaciones, de conversaciones que repasás, de cosas que “ya deberías haber resuelto”. Y aun así seguís cuidando a todos, respondiendo, sosteniendo.</p>'+
+  '<p>Antes de empezar quiero decirte algo: <b style="font-weight:600">no necesitás tener todo resuelto para comenzar.</b> No hace falta que sea un buen día, ni que tengas tiempo de sobra, ni que sepas qué querés. Alcanzan diez minutos y un poco de ganas de escucharte.</p>'+
+  '<div class="pull">Este cuaderno no te va a pedir que dejes la mente en blanco. Te va a enseñar a ordenar lo que pasa adentro.</div>'+
+  '<p>Durante 21 días vas a hacer ejercicios pequeños y distintos entre sí. Algunos te van a resultar fáciles y otros no tanto. Está bien. No hay respuestas correctas o incorrectas, y nadie va a leer lo que escribas.</p>'+
+  '<p>Vas a ir a tu ritmo. Si un día no llegás, retomás al siguiente, sin culpa y sin empezar de cero.</p>'+
+  '<p>Estoy con vos en cada página.</p><div class="sig">NatyCoach</div>'+DISC+pnav("bienvenida")+'</section>';
+};
+PG.higiene=function(){
+  var h='<section class="page"><h1>¿Qué es la higiene mental?</h1>'+
+  '<p class="lead">Cuidamos el cuerpo todos los días: nos bañamos, comemos, dormimos, nos movemos. Pero casi nunca le damos a la mente el mismo cuidado.</p>'+
+  '<p>La higiene mental es eso: hábitos simples y cotidianos para que tu cabeza no viva saturada. No es una técnica complicada ni un tratamiento. Es la suma de pequeñas prácticas que, repetidas, te devuelven espacio.</p>'+
+  '<div class="pull">No hace falta esperar a estar desbordada para empezar a cuidar tu mente.</div>'+
+  '<h2 class="sec">Ocho hábitos de una mente cuidada</h2><p class="small">Marcá los que ya practicás con frecuencia. Sin juzgarte: es solo un punto de partida.</p><div class="fld">';
+  HIG.forEach(function(x,i){ var k="hig_"+i; h+='<label class="ck"><input type="checkbox" data-k="'+k+'" data-t="ck"'+(get(k,false)?' checked':'')+'><span><b style="font-weight:600">'+x[0]+'.</b> '+x[1]+'</span></label>'; });
+  h+='</div>'+note('En este cuaderno vas a practicarlos todos, de a uno. Y el último cuenta tanto como los demás: si en algún momento lo que sentís te supera, pedir ayuda es parte de cuidarte.')+pnav("higiene")+'</section>';
+  return h;
+};
+var MET=[
+ ["Descargar","Sacar de la cabeza lo que da vueltas.","Escribir sin filtro durante unos minutos: pendientes, preocupaciones, cosas dichas y no dichas. No se corrige ni se ordena.","¿Qué hay en mi cabeza ahora?","Lo que se ve, se puede acomodar."],
+ ["Ordenar","Poner cada cosa en su lugar.","Separar lo que es un pensamiento, una preocupación y una acción. Distinguir qué depende de vos y qué no.","¿Qué es esto y qué me toca hacer con esto?","Cada cosa en su cajón."],
+ ["Elegir","Decidir dónde va tu energía hoy.","Quedarte con tres cosas esenciales, elegir un primer paso pequeño y poner un límite cuando haga falta.","¿Qué elijo hoy y qué dejo para después?","Elegir también es cuidarme."],
+ ["Soltar","Dejar ir lo que no depende de vos y cerrar el día.","Aceptar lo que no controlás, tratarte con amabilidad y hacer un cierre consciente del día.","¿Qué no me toca cargar hoy?","Por hoy, terminé."]
+];
+PG.metodo=function(){
+  var h='<section class="page"><h1>El método de los 4 gestos</h1>'+
+  '<p class="lead">Todo lo que vas a hacer en estos 21 días se apoya en cuatro gestos simples. Son fáciles de recordar y podés usarlos en cualquier momento, con o sin este cuaderno.</p>'+
+  '<div style="display:flex;flex-wrap:wrap;gap:8px 6px;align-items:center;justify-content:center;margin:24px 0">';
+  MET.forEach(function(m,i){ h+='<span class="pill p-'+m[0]+'" style="font-size:15px;padding:7px 12px">'+m[0]+'</span>'+(i<3?'<span style="color:var(--gold)">→</span>':''); });
+  h+='</div>';
+  MET.forEach(function(m,i){
+    h+='<details class="gd"'+(i===0?' open':'')+'><summary><span class="dot d-'+m[0]+'"></span>'+m[0]+'</summary><div class="bd"><p><b style="font-weight:600">'+m[1]+'</b></p><p>'+m[2]+'</p><p class="small" style="margin-bottom:4px">La pregunta que te hacés</p><p style="font-style:italic;margin-bottom:.6em">'+m[3]+'</p><p class="small" style="margin-bottom:4px">Para recordar</p><p style="font-style:italic;color:var(--gold-t);margin:0">'+m[4]+'</p></div></details>';
+  });
+  h+='<h2 class="sec">Tu método en 5 minutos</h2><p class="how">Para los días en que no llegás a hacer todo, o para usarlo después de los 21 días.</p><ol class="stp">'+
+  '<li><b style="font-weight:600">Descargar (1 minuto).</b> Escribí tres cosas que tenés en la cabeza.</li>'+
+  '<li><b style="font-weight:600">Ordenar (1 minuto).</b> Preguntate por cada una: ¿es un pensamiento, una preocupación o una acción?</li>'+
+  '<li><b style="font-weight:600">Elegir (2 minutos).</b> Quedate con una sola cosa para hoy y definí su primer paso.</li>'+
+  '<li><b style="font-weight:600">Soltar (1 minuto).</b> Respirá largo y cerrá con una frase: “Por ahora, esto es todo”.</li></ol>'+
+  '<h2 class="sec">Cómo se organizan los 21 días</h2>'+
+  '<div class="card tint-s"><h3 style="font-size:20px">Semana 1: ver lo que hay</h3><p class="how" style="margin:6px 0 0">Descargás, identificás pensamientos y aprendés a diferenciar preocupaciones de acciones.</p></div>'+
+  '<div class="card tint-l"><h3 style="font-size:20px">Semana 2: ordenar y elegir</h3><p class="how" style="margin:6px 0 0">Ponés criterio: qué depende de vos, qué es esencial, cómo empezar y cómo decir que no.</p></div>'+
+  '<div class="card tint-r"><h3 style="font-size:20px">Semana 3: soltar y sostener</h3><p class="how" style="margin:6px 0 0">Bajás la exigencia, te perdonás, recuperás espacios propios y armás un cierre para cada día.</p></div>'+
+  '<p class="small">Cada día del cuaderno te indica qué gesto estás practicando.</p>'+pnav("metodo")+'</section>';
+  return h;
+};
+var DIMS=[["ruido","Ruido mental","Silencio","Mucho ruido"],["cansancio","Cansancio mental","Descansada","Agotada"],["claridad","Claridad","Confusa","Clara"],["calma","Calma","Agitada","Tranquila"],["descanso","Permiso para descansar","Con culpa","Sin culpa"]];
+PG.antes=function(){
+  var h='<section class="page"><h1>Antes de empezar</h1><p class="lead">Unos minutos para preparar el terreno. Después, el día 1.</p>'+
+  '<h2 class="sec">Cómo usar este cuaderno</h2><ol class="stp">'+
+  '<li>Dedicale entre 10 y 15 minutos por día, mejor si es siempre a la misma hora.</li>'+
+  '<li>Escribí sin corregir. Nadie va a leer tus respuestas: se guardan solo en este dispositivo.</li>'+
+  '<li>Si un día no llegás, retomá al siguiente. No hay atrasos ni castigos.</li>'+
+  '<li>Los ejercicios cambian todos los días. Si alguno no te resuena, probalo igual una vez.</li>'+
+  '<li>Al terminar cada día, tocá “Completé el día” para ver tu avance.</li></ol>'+
+  chips("mom","Mi momento del día para hacerlo",["Por la mañana","A media tarde","Por la noche","Cuando pueda"],false)+
+  fill("anc",["Lo voy a hacer después de ___"])+
+  '<div class="rule"></div><h2 class="sec" style="margin-top:0">Mi punto de partida</h2><p class="how">Marcá cómo llegás hoy. No es una nota ni un diagnóstico: es una referencia para compararte con vos misma al final.</p>';
+  DIMS.forEach(function(d){ h+=slider("st_"+d[0],d[1],d[2],d[3],0,10); });
+  h+=ta("reg_llegue","Cómo llego al día 1","Con mis palabras...",3)+ta("reg_pesaba","Qué me está pesando ahora","",3)+
+  '<div class="stack" style="margin-top:26px"><a class="btn" href="#" data-go="d1">Ir al día 1</a></div>'+pnav("antes")+'</section>';
+  return h;
+};
+PG.mapa=function(){
+  var dn=0; DAYS.forEach(function(d){ if(get("done"+d.n,false)) dn++; });
+  var h='<section class="page mapa"><h1>Los 21 días</h1><p class="lead">Elegí el día que te toca. Podés volver a cualquiera cuando quieras.</p>'+
+  '<div class="bar-p" role="img" aria-label="Avance"><i style="width:'+Math.round(dn/21*100)+'%"></i></div><p class="small">'+dn+' de 21 días completados</p>';
+  [1,2,3].forEach(function(w){
+    h+='<div class="wkh"><h2>'+WEEKS[w].t+': '+WEEKS[w].s+'</h2></div>';
+    DAYS.filter(function(d){return d.w===w;}).forEach(function(d){
+      var ok=get("done"+d.n,false);
+      h+='<a class="dl" href="#" data-go="d'+d.n+'"><span class="nb'+(ok?' ok':'')+'">'+(ok?'✓':d.n)+'</span><span class="tt">'+d.t+'</span><span class="pill p-'+d.g+'" style="font-size:12px;padding:3px 10px">'+d.g+'</span></a>';
+    });
+  });
+  h+='<div class="card tint-r" style="margin-top:30px"><h3 style="font-size:20px">¿Un día difícil?</h3><p class="how" style="margin:6px 0 12px">Tenés herramientas rápidas para cuando la cabeza no para.</p><a class="btn s" href="#" data-go="sos">Abrir SOS Mental</a></div>'+pnav("mapa")+'</section>';
+  return h;
+};
+
+PG.day=function(n){
+  var d=DAYS[n-1], pre="d"+n+"_", W=WEEKS[d.w], done=get("done"+n,false);
+  var h='<section class="page"><div class="dayh"><div class="dnum"><small>Día</small><b>'+d.n+'</b></div><div><div class="meta">'+W.t+': '+W.s+'</div><span class="pill p-'+d.g+'">Gesto: '+d.g+'</span></div></div>'+
+  '<h1 class="dayt">'+d.t+'</h1><p class="lead">'+d.intro+'</p><div class="pull">'+d.refl+'</div>'+
+  '<div class="card"><h2 style="font-size:24px;margin-bottom:8px">'+d.ex.t+'</h2><p class="how">'+d.ex.how+'</p>'+d.ex.b.map(function(b){return block(b,pre);}).join("")+'</div>'+
+  '<h2 class="sec">Para escribir</h2>';
+  d.q.forEach(function(q,i){ h+=ta(pre+"q"+i,q,"",3); });
+  h+='<div class="act"><input type="checkbox" data-k="'+pre+'act" data-t="ck" aria-label="Hecho"'+(get(pre+"act",false)?" checked":"")+'><div><b>Mi pequeña acción de hoy</b>'+d.act+'</div></div>'+
+  '<div class="closing">'+moonMini()+d.close+'</div>'+
+  '<div class="mood"><h2 class="sec" style="margin-top:8px">¿Cómo me siento hoy?</h2><div class="moods">';
+  MOODS.forEach(function(m,i){ h+='<button type="button" class="mo'+(get(pre+"mood",null)===i?' on':'')+'" data-act="mood" data-d="'+n+'" data-v="'+i+'" aria-label="'+m.l+'">'+m.e+'<small>'+m.l+'</small></button>'; });
+  h+='</div>'+slider(pre+"ruido","Cuánto ruido mental tengo hoy","Poco","Mucho",0,10)+ta(pre+"nota","Una línea sobre mi día","",2)+'</div>'+
+  '<div class="dn-row"><button type="button" class="btn'+(done?' done':'')+'" data-act="done" data-d="'+n+'">'+(done?'✓ Día completado':'Completé el día')+'</button></div>'+pnav("d"+n)+'</section>';
+  return h;
+};
+
+PG.sos=function(){
+  var h='<section class="page"><h1>SOS Mental</h1><p class="lead">Para los momentos en que no llegás a hacer el día completo. Herramientas rápidas para cuando la mente se acelera. Volvé cuantas veces quieras.</p>';
+  function det(t,sub,body,open,prefix){ return '<details class="gd"'+(open?' open':'')+'><summary><span class="dot d-Descargar" style="background:var(--rose)"></span><span>'+t+'<br><span class="small">'+sub+'</span></span></summary><div class="bd">'+body+clearBtn(prefix)+'</div></details>'; }
+  h+=det("SOS 1. Cuando mi cabeza no para","Una práctica de 5 minutos",
+   '<ol class="stp"><li>Pará lo que estés haciendo. Si podés, sentate.</li><li>Poné el reloj en 5 minutos.</li><li>Hacé tres respiraciones largas.</li><li>Escribí todo lo que aparezca, sin corregir.</li><li>Elegí una sola cosa que sí podés hacer hoy.</li></ol>'+timer(5)+breath(30)+
+   ta("sos1_dump","Todo lo que está pasando por mi cabeza","",6)+ta("sos1_una","La única cosa que hago hoy","",2,"gold")+note("Cerrá diciéndote: “Esto es ruido, no es una orden”.",true),true,"sos1_");
+  h+=det("SOS 2. Cuando siento que todo me supera","Primero el cuerpo, después la lista",
+   '<p class="how">Cuando todo pesa junto, no es momento de decidir. Primero bajá el cuerpo, después ordená.</p><ol class="stp"><li>Apoyá los pies en el piso y soltá los hombros.</li><li>Nombrá 5 cosas que ves, 4 que podés tocar, 3 que escuchás, 2 que olés y 1 que saboreás.</li><li>Exhalá más largo de lo que inhalás, tres veces.</li></ol>'+breath(45)+
+   ta("sos2_hoy","Lo que no puede esperar hoy","Máximo tres cosas",3,"rose")+ta("sos2_espera","Lo que puede esperar","",3,"lav")+ta("sos2_no","Lo que hoy no me toca resolver","",3,"sky")+ta("sos2_una","Lo primero que hago, ahora","",2)+
+   note("Si esta sensación de desborde es muy frecuente o muy intensa, hablalo con un profesional de la salud. No tenés que atravesarlo sola."),false,"sos2_");
+  h+=det("SOS 3. Cuando no sé por dónde empezar","De la confusión a una acción concreta",
+   '<p class="how">Regla de 10 minutos: empezá, y después permitite parar.</p>'+
+   ta("sos3_a","Lo que tengo que resolver, en una frase","",2)+ta("sos3_b","Cómo sería resolverlo lo suficientemente bien","",2)+lines("sos3_c","Tres primeros pasos posibles",3)+ta("sos3_d","El más chiquito (10 minutos)","",2,"gold")+fill("sos3_f",["Lo hago el ___ a las ___"]),false,"sos3_");
+  h+=det("SOS antes de dormir","Una descarga mental nocturna",
+   '<p class="how">Dejá una libreta al lado de la cama. Lo que anotás no se te olvida, y tu mente puede descansar.</p>'+
+   ta("sosn_a","Lo que hice hoy, aunque sea poco","",3)+ta("sosn_b","Lo que me quedó dando vueltas","",3)+lines("sosn_c","Lo que dejo anotado para mañana (máximo 3)",3)+ta("sosn_d","Lo que no puedo resolver esta noche","",2)+fill("sosn_f",["Algo bueno de hoy, aunque sea chiquito: ___"])+breath(60)+note("Por hoy, terminé. Lo que queda es para mañana.",true),false,"sosn_");
+  h+='<div class="stack" style="margin-top:28px"><button type="button" class="btn o" style="border-color:var(--lav-d)" data-act="back">Volver a donde estaba</button></div></section>';
+  return h;
+};
+
+PG.registro=function(){
+  var h='<section class="page"><h1>Registro de progreso</h1><p class="lead">Un lugar para mirar el camino completo. No es una evaluación: es una forma de reconocer lo que se movió.</p>'+
+  '<h2 class="sec">Antes y ahora</h2><p class="how">Marcá cómo estás hoy y compará con tu punto de partida.</p>';
+  DIMS.forEach(function(d){
+    var s=get("st_"+d[0],null);
+    h+='<div class="cmp"><div class="was">Al empezar: '+(s==null?'sin marcar':s+' / 10')+'</div>'+slider("en_"+d[0],"Hoy: "+d[1],d[2],d[3],0,10)+'</div>';
+  });
+  h+='<h2 class="sec">Mi ruido mental, día a día</h2><div class="big">'+week(1,21)+'</div>'+
+  '<div class="rule"></div>'+
+  ta("reg_llegue","Cómo llegué al día 1","",3)+ta("reg_pesaba","Qué me estaba pesando","",3)+
+  ta("reg_desc","Qué descubrí durante el proceso","",4)+ta("reg_cambio","Qué cambió","",4)+ta("reg_mant","Qué quiero mantener","",3,"rose")+ta("reg_seguir","Qué necesito seguir trabajando","",3,"lav")+
+  pnav("registro")+'</section>';
+  return h;
+};
+
+PG.continuar=function(){
+  var h='<section class="page"><h1>Después de los 21 días</h1><p class="lead">Lo que aprendiste se vuelve tuyo cuando se convierte en hábito. Una rutina sencilla alcanza: cinco minutos por día, quince por semana y una revisión al mes.</p>'+
+  '<h2 class="sec">Cinco minutos diarios</h2><ol class="stp"><li><b style="font-weight:600">Descargar (1 min).</b> Escribí tres cosas que tenés en la cabeza.</li><li><b style="font-weight:600">Ordenar (1 min).</b> ¿Es pensamiento, preocupación o acción?</li><li><b style="font-weight:600">Elegir (2 min).</b> Una sola cosa para hoy y su primer paso.</li><li><b style="font-weight:600">Soltar (1 min).</b> Respirá largo y cerrá el día con una frase.</li></ol>'+
+  chips("cont_mom","Mi momento para los 5 minutos",["Al despertar","Después de almorzar","Antes de dormir","Cuando pueda"],false)+
+  fill("cont_a",["Lo voy a hacer después de ___","Mi frase de cierre es ___"])+
+  '<p class="lbl" style="margin-top:22px">Mis próximos 30 días</p><p class="small">Tildá cada día que hagas tus 5 minutos. Sin exigencia: lo que cuenta es volver.</p><div class="grid30">';
+  for(var i=1;i<=30;i++){ var k="cont_g"+i; h+='<label>'+i+'<input type="checkbox" data-k="'+k+'" data-t="ck"'+(get(k,false)?" checked":"")+'></label>'; }
+  h+='</div><h2 class="sec">Quince minutos semanales</h2><p class="how">Una cita con vos misma, siempre el mismo día. Respondé:</p><ol class="stp"><li>¿Qué me pesó esta semana?</li><li>¿Qué logré ordenar?</li><li>¿Qué necesito soltar?</li><li>¿Cuáles son mis tres esenciales de la semana que viene?</li><li>¿Qué gesto de cuidado me voy a regalar?</li></ol>'+
+  fill("cont_s",["Mi cita semanal: los ___ a las ___"])+ta("cont_sn","Notas de mi última cita semanal","",4)+
+  '<h2 class="sec">Una revisión mensual</h2><p class="how">Una vez por mes, mirá el panorama completo:</p><ol class="stp"><li>¿Qué cambió en mi ruido mental este mes?</li><li>¿Qué práctica me sirvió más?</li><li>¿Qué límite necesito poner o sostener?</li><li>¿Qué quiero cuidar el mes que viene?</li></ol>'+
+  '<div class="fld"><label for="cont_fecha">Mi primera revisión mensual</label><input type="date" id="cont_fecha" data-k="cont_fecha" data-t="tx" value="'+esc(get("cont_fecha",""))+'"></div>'+ta("cont_mn","Mi revisión mensual","",4)+
+  '<h2 class="sec">Mi caja de herramientas</h2>'+chips("cont_fav","Las que más me sirvieron",["Descarga de 5 minutos","Tres cajones","Círculo de control","Regla de tres","Primer paso chiquito","Mi no amable","Pausa de un minuto","Ritual de cierre","Carta de perdón","Gracias, y también"],true)+
+  ta("cont_ancla","Mi frase ancla para los días difíciles","",2,"gold")+
+  '<div class="card tint-r"><p class="how" style="margin:0 0 10px">Si en un día difícil no llegás a nada más, volvé a SOS Mental.</p><a class="btn s" href="#" data-go="sos">Abrir SOS Mental</a></div>'+pnav("continuar")+'</section>';
+  return h;
+};
+
+PG.cierre=function(){
+  return '<section class="page"><h1>Cierre</h1>'+
+  '<p class="lead">Llegaste hasta acá.</p>'+
+  '<p>Empezaste sin saber si esto iba a servirte. Te sentaste, escribiste, frenaste, volviste. Eso, más que cualquier resultado, ya dice algo de vos.</p>'+
+  '<p>Tal vez tu cabeza no esté en silencio. Tal vez nunca lo esté del todo, y está bien: una mente viva piensa, se preocupa, imagina y recuerda.</p>'+
+  '<p>Lo que cambió es otra cosa. Ahora sabés que podés sacar lo que te pesa. Que podés separar un pensamiento de una preocupación y de una acción. Que podés elegir dónde poner tu energía, y que soltar no es abandonar: es cuidarte.</p>'+
+  '<div class="pull">No necesitás controlar cada pensamiento para vivir con más claridad. Necesitás aprender a elegir qué hacer con aquello que aparece en tu mente.</div>'+
+  '<p>Volvé a este cuaderno cada vez que lo necesites. Las herramientas ya son tuyas.</p>'+
+  '<p>Con cariño,</p><div class="sig">NatyCoach</div>'+DISC+
+  '<div class="stack" style="margin-top:26px"><a class="btn o" style="border-color:var(--lav-d)" href="#" data-go="mapa">Volver al mapa de los 21 días</a><a class="btn o" style="border-color:var(--lav-d)" href="#" data-go="sos">SOS Mental</a></div></section>';
+};
+var ORDER=["portada","bienvenida","higiene","metodo","antes","mapa"];
+for(var _i=1;_i<=21;_i++) ORDER.push("d"+_i);
+ORDER=ORDER.concat(["registro","continuar","cierre"]);
+var CUR="portada", LAST="mapa";
+var MENU=[["bienvenida","Bienvenida"],["higiene","¿Qué es la higiene mental?"],["metodo","El método de los 4 gestos"],["antes","Antes de empezar"],["mapa","Los 21 días"],["sos","SOS Mental"],["registro","Registro de progreso"],["continuar","Después de los 21 días"],["cierre","Cierre"]];
+
+/* ---------- respiración y timer ---------- */
+var BR=null, TIM=null;
+function fmt(s){ var m=Math.floor(s/60), x=s%60; return (m<10?"0":"")+m+":"+(x<10?"0":"")+x; }
+function stopBreath(fin){
+  if(!BR) return; clearTimeout(BR.t); clearInterval(BR.tick);
+  BR.orb.className="orb"; BR.bt.textContent=fin?"Listo. Notá cómo estás ahora.":"Inhalá 4 segundos. Exhalá 6."; BR.btn.textContent=BR.orig; BR=null;
+}
+function breathToggle(box){
+  if(BR&&BR.box===box){ stopBreath(false); return; }
+  stopBreath(false);
+  var orb=$(".orb",box), bt=$(".bt",box), btn=$("[data-act=breath]",box), left=+box.getAttribute("data-breath");
+  BR={box:box,orb:orb,bt:bt,btn:btn,orig:btn.textContent,t:null,tick:null};
+  btn.textContent="Detener ("+left+")";
+  function inh(){ orb.className="orb in"; bt.textContent="Inhalá…"; BR.t=setTimeout(exh,4000); }
+  function exh(){ orb.className="orb out"; bt.textContent="Exhalá despacio…"; BR.t=setTimeout(inh,6000); }
+  BR.tick=setInterval(function(){ left--; if(left<=0){ stopBreath(true); } else { btn.textContent="Detener ("+left+")"; } },1000);
+  setTimeout(inh,30);
+}
+function stopTimer(){ if(TIM){ clearInterval(TIM.iv); TIM=null; } }
+function timerGo(box){
+  var tEl=$(".t",box), btn=$("[data-act=tgo]",box);
+  if(TIM&&TIM.box===box){ if(TIM.run){ clearInterval(TIM.iv); TIM.run=false; btn.textContent="Seguir"; return; } }
+  else { stopTimer(); TIM={box:box,left:+box.getAttribute("data-timer"),run:false,iv:null}; }
+  TIM.run=true; btn.textContent="Pausar";
+  TIM.iv=setInterval(function(){
+    TIM.left--; tEl.textContent=fmt(TIM.left);
+    if(TIM.left<=0){ clearInterval(TIM.iv); TIM=null; tEl.textContent="¡Tiempo!"; btn.textContent="Iniciar"; try{ if(navigator.vibrate) navigator.vibrate([200,100,200]); }catch(e){} }
+  },1000);
+}
+function timerReset(box){ if(TIM&&TIM.box===box) stopTimer(); $(".t",box).textContent=fmt(+box.getAttribute("data-timer")); $("[data-act=tgo]",box).textContent="Iniciar"; }
+function stopAll(){ stopBreath(false); stopTimer(); }
+
+/* ---------- interfaz ---------- */
+function grow(t){ t.style.height="auto"; t.style.height=Math.max(t.scrollHeight,(parseInt(t.getAttribute("rows"),10)||1)*34)+"px"; }
+function doneCount(){ var c=0; for(var i=1;i<=21;i++) if(get("done"+i,false)) c++; return c; }
+function updateBar(){
+  var bar=$("#bar"); bar.classList.toggle("hide",CUR==="portada");
+  $("#prog").textContent=doneCount()+" / 21";
+  var sos=$("#sosf"); if(sos) sos.style.display=(CUR==="portada"||CUR==="sos")?"none":"block";
+}
+function menuHtml(){
+  var h='<h3>Mi cuaderno</h3>';
+  MENU.forEach(function(m){ h+='<a class="ml" href="#" data-go="'+m[0]+'">'+m[1]+'</a>'; });
+  h+='<h3 style="margin-top:22px">Mis datos</h3><button type="button" class="ml" style="width:100%;text-align:left;border:0;background:transparent;font-family:inherit;cursor:pointer" data-act="backup">Guardar una copia de mis respuestas</button><button type="button" class="ml" style="width:100%;text-align:left;border:0;background:transparent;font-family:inherit;cursor:pointer" data-act="restore-btn">Restaurar desde una copia</button>';
+  h+='<h3 style="margin-top:22px">Días</h3><div class="dg">';
+  for(var i=1;i<=21;i++) h+='<a href="#" data-go="d'+i+'" class="'+(get("done"+i,false)?"ok ":"")+(CUR==="d"+i?"cur":"")+'">'+i+'</a>';
+  h+='</div><button type="button" class="rs" data-act="reset">Borrar todas mis respuestas</button>'+(MEM?'<p class="small">Este navegador no permite guardar: tus respuestas se conservan solo mientras la página esté abierta.</p>':'');
+  return h;
+}
+function pad2(n){ return (n<10?"0":"")+n; }
+function backupObj(){ return {app:"ordena-tu-mente",marca:"NatyCoach",exportado:new Date().toISOString(),datos:S}; }
+function doBackup(){
+  try{
+    var blob=new Blob([JSON.stringify(backupObj())],{type:"application/json"});
+    var url=URL.createObjectURL(blob);
+    var d=new Date(), name="copia-ordena-tu-mente-"+d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate())+".json";
+    var a=document.createElement("a"); a.href=url; a.download=name; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); },5000);
+  }catch(e){ window.alert("No se pudo crear la copia en este navegador."); }
+}
+function doRestore(file){
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var obj=JSON.parse(r.result), d=(obj&&obj.datos)?obj.datos:obj;
+      if(!d||typeof d!=="object") throw 0;
+      if(!window.confirm("Esto va a reemplazar lo que tenés guardado ahora por lo que hay en la copia. ¿Continuar?")) return;
+      S=d; flushSave();
+      window.alert("Copia restaurada."); location.reload();
+    }catch(e){ window.alert("Ese archivo no parece una copia válida de este cuaderno."); }
+  };
+  r.readAsText(file);
+}
+function openMenu(){ $("#menuIn").innerHTML=menuHtml(); $("#menu").classList.add("open"); $("#menu").setAttribute("aria-hidden","false"); }
+function closeMenu(){ $("#menu").classList.remove("open"); $("#menu").setAttribute("aria-hidden","true"); }
+
+function render(){
+  var id=CUR, h;
+  if(/^d\d+$/.test(id)) h=PG.day(+id.slice(1)); else h=PG[id]();
+  $("#app").innerHTML=h;
+  $$("[data-list]").forEach(paintList);
+  $$("textarea").forEach(grow);
+  closeMenu(); updateBar();
+  window.scrollTo(0,0);
+  document.title="ORDENÁ TU MENTE · Cuaderno de 21 días | NatyCoach";
+}
+function go(id){
+  flushSave();
+  var ok=(id==="sos")||ORDER.indexOf(id)>-1;
+  if(!ok) id="portada";
+  stopAll();
+  if(id==="sos"&&CUR!=="sos") LAST=CUR;
+  CUR=id; if(id!=="portada") set("_page",id);
+  render();
+}
+
+/* ---------- eventos ---------- */
+document.addEventListener("input",function(e){
+  var t=e.target, k=t.getAttribute&&t.getAttribute("data-k"); if(!k) return;
+  var ty=t.getAttribute("data-t");
+  if(ty==="sl"){ S[k]=+t.value; save(true); t.classList.remove("un"); var v=document.getElementById(k+"_v"); if(v) v.textContent=t.value+" / "+t.max; if(/^d\d+_ruido$/.test(k)||/^st_|^en_/.test(k)){} }
+  else if(ty==="ck"){ S[k]=t.checked; save(true); }
+  else { S[k]=t.value; if(t.tagName==="TEXTAREA") grow(t); }
+  if(ty!=="sl"&&ty!=="ck") save();
+});
+document.addEventListener("focusout",function(e){
+  var t=e.target, k=t.getAttribute&&t.getAttribute("data-k");
+  if(k&&(t.tagName==="TEXTAREA"||t.tagName==="INPUT")) flushSave();
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Enter"&&e.target.closest&&e.target.closest(".tl .add")&&e.target.tagName==="INPUT"){ e.preventDefault(); addItem(e.target.closest("[data-list]")); }
+});
+document.addEventListener("toggle",function(e){ if(e.target.tagName==="DETAILS") $$("textarea",e.target).forEach(grow); },true);
+
+function addItem(box){
+  var inp=$(".add input[type=text]",box), sel=$(".add select",box), v=inp.value.trim(); if(!v) return;
+  var id=box.getAttribute("data-list"), arr=get(id,[]).slice(); arr.push({t:v,d:sel.value,c:false}); set(id,arr); inp.value=""; paintList(box); inp.focus();
+}
+document.addEventListener("click",function(e){
+  var g=e.target.closest&&e.target.closest("[data-go]");
+  if(g){ e.preventDefault(); go(g.getAttribute("data-go")); return; }
+  var chip=e.target.closest&&e.target.closest(".chip");
+  if(chip){
+    var box=chip.parentNode, id=box.getAttribute("data-chips"), multi=box.getAttribute("data-multi")==="1", v=chip.getAttribute("data-v");
+    if(multi){ var a=get(id,[]).slice(), i=a.indexOf(v); if(i>-1) a.splice(i,1); else a.push(v); set(id,a); chip.classList.toggle("on",i===-1); chip.setAttribute("aria-pressed",i===-1); }
+    else { var cur=get(id,""), nv=(cur===v)?"":v; set(id,nv); $$(".chip",box).forEach(function(c){ var on=c.getAttribute("data-v")===nv; c.classList.toggle("on",on); c.setAttribute("aria-pressed",on); }); }
+    return;
+  }
+  var a=e.target.closest&&e.target.closest("[data-act]"); if(!a) return;
+  var act=a.getAttribute("data-act");
+  if(act==="menu") openMenu();
+  else if(act==="close") closeMenu();
+  else if(act==="add") addItem(a.closest("[data-list]"));
+  else if(act==="del"||act==="tog"){ var lb=a.closest("[data-list]"), id2=lb.getAttribute("data-list"), arr=get(id2,[]).slice(), ix=+a.getAttribute("data-i"); if(act==="del") arr.splice(ix,1); else arr[ix].c=!arr[ix].c; set(id2,arr); paintList(lb); }
+  else if(act==="breath") breathToggle(a.closest("[data-breath]"));
+  else if(act==="tgo") timerGo(a.closest("[data-timer]"));
+  else if(act==="trs") timerReset(a.closest("[data-timer]"));
+  else if(act==="mood"){ var d=a.getAttribute("data-d"), val=+a.getAttribute("data-v"); set("d"+d+"_mood",val); $$(".mo").forEach(function(m){ m.classList.toggle("on",m===a); }); }
+  else if(act==="done"){ var dd=a.getAttribute("data-d"), nv2=!get("done"+dd,false); set("done"+dd,nv2); a.classList.toggle("done",nv2); a.textContent=nv2?"✓ Día completado":"Completé el día"; updateBar(); }
+  else if(act==="clear"){ var p=a.getAttribute("data-p"); Object.keys(S).forEach(function(k){ if(k.indexOf(p)===0) delete S[k]; }); save(); stopAll(); render(); }
+  else if(act==="back"){ go(LAST&&LAST!=="sos"?LAST:"mapa"); }
+  else if(act==="backup"){ doBackup(); }
+  else if(act==="restore-btn"){
+    var inp=document.getElementById("restoreInput");
+    if(!inp){ inp=document.createElement("input"); inp.type="file"; inp.accept="application/json"; inp.id="restoreInput"; inp.style.display="none";
+      inp.addEventListener("change",function(){ if(inp.files&&inp.files[0]) doRestore(inp.files[0]); inp.value=""; });
+      document.body.appendChild(inp);
+    }
+    inp.click();
+  }
+  else if(act==="reset"){
+    if(!a.getAttribute("data-c")){ a.setAttribute("data-c","1"); a.textContent="Tocá de nuevo para confirmar el borrado"; a.style.color="#A0616A"; }
+    else { S={}; try{ localStorage.removeItem(KEY); }catch(er){} go("portada"); }
+  }
+});
+
+/* ---------- inicio ---------- */
+(function(){
+  var f=document.createElement("a"); f.id="sosf"; f.href="#"; f.setAttribute("data-go","sos"); f.textContent="SOS"; f.setAttribute("aria-label","Abrir SOS Mental"); f.style.display="none"; document.body.appendChild(f);
+  go("portada");
+})();
+</script></body></html>
